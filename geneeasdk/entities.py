@@ -54,15 +54,6 @@ def testResults(inputsAndResults):
     for apiInput, result in inputsAndResults:
         print(apiInput, result)
 
-def responseToEvalEntities(response):
-    evalEnts = []
-    for entity in response.entities:
-        entType = entity.type
-        for inst in entity.instances:
-            evalEnts.append({'text' : inst.text, 'textOffset': inst.textOffset, 'type': entType})
-
-    return evalEnts
-
 def evaluateEntities(inputsAndResults, trueVals):
     raise Exception('entities evaluation not implemented yet')
 
