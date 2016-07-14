@@ -48,7 +48,7 @@ class S2ApiInput(namedtuple('S2ApiInput', [
         """
         docDict = {k: v for k, v in document._asdict().items() if v}
         data = ChainMap(docDict, flags)
-        inputDict = {fldName : data.get(fldName, '') for fldName in S2ApiInput._fields}
+        inputDict = {fldName : data.get(fldName, None) for fldName in S2ApiInput._fields}
         return S2ApiInput(**inputDict)
 
     def serialize(self) -> str:

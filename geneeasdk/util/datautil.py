@@ -1,7 +1,7 @@
 # coding=utf-8
 
 """
-Helper functions for data processing
+Data representation and processing
 """
 
 import itertools
@@ -11,19 +11,28 @@ from collections import namedtuple
 from collections.abc import Iterable
 from operator import itemgetter
 
-# 'protocol' used for URLs pointing to S3 resources
-S3_URL_PREFIX = 's3://'
+class Document(namedtuple('Document', ['uid', 'text', 'title', 'lead', 'language', 'domain', 'metadata'])):
+    """
+    A textual document, typically used as analysis input
+    """
+    __slots__ = ()
 
-# A document, typically used as analysis input
-Document = namedtuple('Document', [
-        'uid', # unique document ID
-        'text', # text (body) of the document
-        'title', # title of the document
-        'lead', # lead (abstract) of the document
-        'language', # document's language
-        'domain', # document's domain
-        'metadata' # additional metadata
-])
+    @staticmethod
+    def make(uid, text, *, title='', lead='', language=None, domain=None, metadata=None):
+        """
+        Create a new Document instance. This is a more user friendly method than the default constructor,
+        since it has default values for most of parameters.
+
+        @param uid: unique document ID
+        @param text: text (body) of the document
+        @param title: title of the document
+        @param lead: lead (abstract) of the document
+        @param language: document's language
+        @param domain: document's domain
+        @param metadata: additional metadata (dict)
+        """
+        metadata = {} if metadata is None else metadata
+        return Document(uid, text, title, lead, language, domain, metadata)
 
 def timeStr(seconds=None) -> str:
     """
@@ -74,7 +83,7 @@ def rowToDocument(row, config) -> Document:
 
 def docStream(lines, config):
     """
-    Create a stream of Documents from TSV line interable
+    Create a stream of Documents from TSV line iterable
     @param lines: input line iterable, lines should contain TSV
     @param config: input data column configuration
     @return: generator of Document objects
@@ -83,7 +92,7 @@ def docStream(lines, config):
 
 def colStream(lines, colNo):
     """
-    Create a stream of values of given column from TSV line interable
+    Create a stream of values of given column from TSV line iterable
     @param lines: input line iterable, lines should contain TSV
     @param colNo: column number
     @return: generator of string values of given column
