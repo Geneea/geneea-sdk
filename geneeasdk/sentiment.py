@@ -13,7 +13,7 @@ from geneeasdk.util.restutil import S2ApiInput
 
 from collections import namedtuple
 
-DEFAULT_URL = 'https://beta-api.geneea.com/s2/sentiment'
+DEFAULT_URL = 'https://api.geneea.com/s2/sentiment'
 
 class SentimentResponse(namedtuple('SentimentResponse', ['sentiment', 'label', 'language'])):
     __slots__ = ()

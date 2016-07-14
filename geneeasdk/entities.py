@@ -13,7 +13,7 @@ from geneeasdk.util.restutil import S2ApiInput
 
 from collections import namedtuple
 
-DEFAULT_URL = 'https://beta-api.geneea.com/s2/entities'
+DEFAULT_URL = 'https://api.geneea.com/s2/entities'
 
 EntityInstance = namedtuple('EntityInstance', ['text', 'textOffset', 'textSegment'])
 

@@ -8,7 +8,7 @@ Python SDK for Geneea APIs
     from geneeasdk.sentiment import getSentiment
     
     doc = Document.make('1', title='I love Python', text='Yes, I do')
-    list(getSentiment([doc], flags={}, url='https://api.geneea.com/s2/sentiment', key=<your_user_key>))
+    list(getSentiment([doc], flags={'language': 'en'}, url='https://api.geneea.com/s2/sentiment', key=<your_user_key>))
 
 result: `[SentimentResponse(sentiment=1, label='positive', language='en')]`
 
